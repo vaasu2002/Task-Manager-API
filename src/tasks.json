@@ -1,1 +1,14 @@
+<<<<<<< HEAD
 [{"id":1,"task_title":"Complete Project Proposal","task_description":"Write and finalize the project proposal for Task Manager Application.","flag":"PENDING"},{"id":2,"task_title":"Complete Project Proposal","task_description":"Write and finalize the project proposal for Task Manager Application.","flag":"PENDING"},{"id":3,"task_title":"Complete Project Proposal","task_description":"Write and finalize the project proposal for Task Manager Application.","flag":"PENDING"}]
+=======
+[
+    {
+      "id": 1,
+      "task_title": "Task 1"
+    },
+    {
+      "id": 2,
+      "task_title": "Task 2"
+    }
+]
+>>>>>>> 9993b59d3840fe4b4eaf037bc42a76a95322f286
