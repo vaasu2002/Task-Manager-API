@@ -30,9 +30,10 @@ The Task Manager API utilizes a JSON file named `data.json` as the data store to
 ```json
 {
     "id": 1,
-    "task_title": "Task 1",
-    "task_description": "Task 1 Description",
-    "flag": "PENDING"
+    "task_title": "Task 3",
+    "task_description": "Task 3 Description",
+    "flag": "PENDING",
+    "createDate": "2023-07-27"
 }
 ```
 
