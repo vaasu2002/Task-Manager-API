@@ -19,6 +19,9 @@ function validateCreateRequest(req, res, next) {
     if(req.body.flag && !(req.body.flag in Enums.FLAG_TYPES)){
         error_explaination.push('Invalid flag value in the oncoming request');
     }
+    if(req.body.priority && !(req.body.priority in Enums.PRIORITY_LEVEL)){
+        error_explaination.push('Invalid priority level in the oncoming request');
+    }
     if(error_explaination.length > 0){
         ErrorResponse.message = 'Something went wrong while creating the task';
         ErrorResponse.error = new AppError(error_explaination, StatusCodes.BAD_REQUEST);
@@ -30,10 +33,13 @@ function validateCreateRequest(req, res, next) {
 }
 
 function validateUpdateRequest(req,res,next){
-    const allowedFields = ['task_title', 'task_description','flag'];
+    const allowedFields = ['task_title', 'task_description','flag','priority'];
     let error_explaination = [];
     if(req.body.flag && !(req.body.flag in Enums.FLAG_TYPES)){
         error_explaination.push('Invalid flag value in the oncoming request');
+    }
+    if(req.body.priority  && !(req.body.priority in Enums.PRIORITY_LEVEL)){
+        error_explaination.push('Invalid priority level in the oncoming request');
     }
     if(req.body.id){
         error_explaination.push('User cannot define the id of the task');
@@ -52,7 +58,19 @@ function validateUpdateRequest(req,res,next){
     next();
 }
 
+function validatePriorityRequest(req,res,next){
+    if(!(req.params.level.toUpperCase() in Enums.PRIORITY_LEVEL)){
+        ErrorResponse.message = 'Something went wrong while creating the task';
+        ErrorResponse.error = new AppError('Invalid priority level in the oncoming request', StatusCodes.BAD_REQUEST);
+        return res
+            .status(StatusCodes.BAD_REQUEST)
+            .json(ErrorResponse);
+    }
+    next();
+}
+
 module.exports = {
     validateCreateRequest,
-    validateUpdateRequest
+    validateUpdateRequest,
+    validatePriorityRequest
 }

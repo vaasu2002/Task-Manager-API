@@ -3,6 +3,13 @@ const FLAG_TYPES = {
     COMPLETED: 'COMPLETED',
 }
 
+const PRIORITY_LEVEL = {
+    LOW: 'LOW',
+    MEDIUM: 'MEDIUM',
+    HIGH: 'HIGH',
+}
+
 module.exports = {
     FLAG_TYPES,
+    PRIORITY_LEVEL
 }

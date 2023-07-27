@@ -12,6 +12,7 @@ const createTask = (req,res)=>{
   try{
     const task_title = req.body.task_title;
     const task_description = req.body.task_description;
+    const priority = req.body.priority || Enums.PRIORITY_LEVEL.LOW; // default is low
     const flag = req.body.flag || Enums.FLAG_TYPES.PENDING; // default is pending
     const tasks = ManageFile.readTasks();
     const id = tasks.length === 0 ? 1 : tasks[tasks.length - 1].id + 1; // generate id
@@ -19,6 +20,7 @@ const createTask = (req,res)=>{
         id:id,
         task_title:task_title,
         task_description:task_description,
+        priority:priority, 
         flag:flag,
         createDate: new Date().toISOString().split('T')[0]
     };
@@ -162,10 +164,35 @@ const updateTask = (req,res)=>{
   }
 }
 
+
+const getTasksByPriority = (req,res)=>{
+  try{
+    const priority = req.params.level.toUpperCase();
+    let tasks = ManageFile.readTasks();
+    tasks = tasks.filter((task) => task.priority === priority);
+    if(tasks.length === 0){
+      ErrorResponse.error = new AppError('Task not found',StatusCodes.NOT_FOUND);
+      return res
+          .status(StatusCodes.NOT_FOUND)
+          .json(ErrorResponse);
+    }
+    SuccessResponse.data = tasks;
+    return res
+            .status(StatusCodes.OK)
+            .json(SuccessResponse);
+  }catch(error){
+    ErrorResponse.error = error;
+    return res
+            .status(error.statusCode)
+            .json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createTask,
   deleteTask,
   getAllTasks,
   getTaskById,
-  updateTask
+  updateTask,
+  getTasksByPriority
 };
