@@ -1,15 +1,16 @@
-const express = require('express')
+const express = require('express');
+
+const { InfoController } = require('../../controllers');
+const {createTask,deleteTask, getAllTasks, getTaskById,updateTask} = require('../../controllers/task-controller')
+const {TaskMiddlewares} = require('../../middlewares')
+// const TaskRoutes = require('./task-routes')
+
 const router = express.Router();
 
-<<<<<<< HEAD
-const {createTask,deleteTask} = require('../../controllers/task-controller')
-
-router.post('/',createTask);
+router.post('/', TaskMiddlewares.validateCreateRequest,createTask);
 router.delete('/:id',deleteTask);
-=======
-const {createTask} = require('../../controllers/task-controller')
-
-router.post('/',createTask);
->>>>>>> 9993b59d3840fe4b4eaf037bc42a76a95322f286
+router.get('/',getAllTasks);
+router.get('/:id',getTaskById);
+router.put('/:id',TaskMiddlewares.validateUpdateRequest,updateTask);
 
 module.exports = router;
