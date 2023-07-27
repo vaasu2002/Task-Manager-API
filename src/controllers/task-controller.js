@@ -19,7 +19,8 @@ const createTask = (req,res)=>{
         id:id,
         task_title:task_title,
         task_description:task_description,
-        flag:flag
+        flag:flag,
+        createDate: new Date().toISOString().split('T')[0]
     };
     tasks.push(newTask);
     ManageFile.saveTasks(tasks);
@@ -75,6 +76,17 @@ const deleteTask = (req,res)=>{
 const getAllTasks = (req,res)=>{
   try{
     let tasks = ManageFile.readTasks();
+    const sortByDate = req.query.sortByDate;
+    const flagStatus = req.query.flagStatus;
+    if(flagStatus){
+      tasks = tasks.filter((task) => task.flag === flagStatus);
+    }
+    // default in acsending order
+    if(sortByDate === 'asc' || !sortByDate) {
+      tasks.sort((a, b) => new Date(a.createDate) - new Date(b.createDate));
+    }else if(sortByDate === 'desc'){
+      tasks.sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
+    }
     SuccessResponse.data = tasks;
     return res
             .status(StatusCodes.OK)
