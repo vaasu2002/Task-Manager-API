@@ -2,13 +2,11 @@
 
 The Task Manager API is a RESTful API built using Node.js, Express.js, and NPM packages. It allows users to manage tasks with title, description, and completion status. This API enables CRUD operations (Create, Read, Update, and Delete) on tasks, providing a convenient way to manage task data efficiently.
 
-## Documentation
-[Postman Documentation](https://documenter.getpostman.com/view/19379633/2s946pZpN4)
 ## Features
 - Retrieve all tasks from the task manager.
 - Retrieve a specific task by its unique identifier (ID).
-- Create a new task with title, description, and completion status.
-- Update an existing task by its ID with new title, description, or completion status.
+- Create a new task with a title, description, and completion status.
+- Update an existing task by its ID with a new title, description, or completion status.
 - Delete a task by its ID.
 
 ## Getting Started
