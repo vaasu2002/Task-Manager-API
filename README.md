@@ -1,58 +1,49 @@
-# Node.js Project Template [Backend]
+# Task Manager API
 
-This is a Node.js project template that provides a solid foundation for building scalable and maintainable applications. It follows best practices and incorporates project management recommendations. Feel free to customize and modify it according to your specific needs.
+The Task Manager API is a RESTful API built using Node.js, Express.js, and NPM packages. It allows users to manage tasks with title, description, and completion status. This API enables CRUD operations (Create, Read, Update, and Delete) on tasks, providing a convenient way to manage task data efficiently.
 
-## Project Structure
-The project structure is designed to keep the code organized and easy to navigate. Here's a breakdown of the main folders and their purposes:
+## Documentation
+[Postman Documentation](https://documenter.getpostman.com/view/19379633/2s946pZpN4)
+## Features
+- Retrieve all tasks from the task manager.
+- Retrieve a specific task by its unique identifier (ID).
+- Create a new task with title, description, and completion status.
+- Update an existing task by its ID with new title, description, or completion status.
+- Delete a task by its ID.
 
-`src`: This folder contains all the source code for the project, excluding tests. You can add your application code here.
+## Getting Started
+1. Clone the repository: `git clone https://github.com/vaasu2002/Task-Manager-API.git`
+2. Install dependencies: `npm install`
+3. Setup .env and add PORT environment
+3. Start the server: `npm run dev`
 
-  - `config`: This folder is dedicated to configuration files. It includes setup for libraries or modules used in the project, such as `dotenv` for managing environment variables or a logging library for meaningful logs. You can configure these libraries in the respective files.
+## Endpoints
+- `GET /tasks`: Retrieve all tasks.
+- `GET /tasks/:id`: Retrieve a specific task by its ID.
+- `POST /tasks`: Create a new task.
+- `PUT /tasks/:id`: Update an existing task by its ID.
+- `DELETE /tasks/:id`: Delete a task by its ID.
 
-  - `routes`: In this folder, you register routes and define the corresponding middleware and controllers for handling incoming requests.
+## Data Store
+The Task Manager API utilizes a JSON file named `data.json` as the data store to persist task data. Each task is stored as a JSON object in the file with the following properties:
 
-  - `middlewares`: Middlewares intercept incoming requests and allow you to implement validators, authenticators, and other request processing logic.
+```json
+{
+    "id": 1,
+    "task_title": "Task 1",
+    "task_description": "Task 1 Description",
+    "flag": "PENDING"
+}
+```
 
-  - `controllers`: Controllers act as the last middlewares in the request pipeline. They receive incoming requests and data, call the business layer to execute the logic, and structure the API response before sending it back.
+## Error Handling
+The API is designed with proper error handling for invalid requests, such as incorrect endpoint usage, missing parameters, or invalid data inputs. In case of an error, the API responds with an appropriate error message and status code to inform the client about the issue.
 
-  - `repositories`: This folder contains the logic for interacting with the database. You can write raw queries or use an ORM (Object-Relational Mapping) here.
+## Input Validation
+The API implements input validation for task creation and updates to ensure that the `task_title` and `task_description` fields are not empty, and the `flag` field, if provided, is a valid boolean value.
 
-  - `services`: Services encapsulate the business logic of your application. They interact with repositories to retrieve and manipulate data from the database.
+## Testing
+The API has been thoroughly tested using Postman to ensure its functionality and reliability. All endpoints have been tested for expected responses, error handling, and edge cases to provide a robust user experience.
 
-  - `utils`: The utils folder houses helper methods, error classes, and other utility functions that can be reused throughout the project.
-
-## Project Setup
-To set up the project, follow these steps:
-
-  - Download this template from GitHub and open it in your favorite text editor.
-
-  - Navigate to the project's root directory in the terminal and execute the following command to install dependencies:
-
-    ```bash
-    npm install
-    ```
-  - In the root directory, create a .env file and add the following environment variable:
-    ```js
-    PORT=<port number of your choice>
-    ```
-    For example:
-    ```
-    PORT=3001
-    ```
-  - Go inside the src folder and execute the following command to initialize Sequelize (a popular ORM for Node.js):
-    ```bash
-    npx sequelize init
-    ```
-  - This command will generate the migrations and seeders folders, along with a config.json file inside the config folder.
-
-  - If you are setting up the development environment, specify the username and password for your database in the config.json file. Also, mention the dialect corresponding to your database (e.g., mysql, mariadb).
-
-  - If you are setting up the test or production environment, ensure that you replace the host with the URL of your hosted database.
-
-  - To run the server, execute the following command in the project's root directory:
-    ```bash
-    npm run dev
-    ```
-
-## Contributing
-Feel free to modify this template as per your project requirements. If you have any suggestions, improvements, or bug fixes, please submit them as issues or pull requests on the GitHub repository.
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
